@@ -39,7 +39,6 @@
             cikis_menu = new ToolStripButton();
             panel1 = new Panel();
             toolStrip1.SuspendLayout();
-            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // toolStrip1
@@ -143,12 +142,13 @@
             ClientSize = new Size(464, 743);
             Controls.Add(panel1);
             Controls.Add(toolStrip1);
+            KeyPreview = true;
             Name = "Form1";
             Load += Form1_Load;
+            KeyDown += Form1_KeyDown;
+            KeyPress += Form1_KeyPress;
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -175,7 +175,7 @@
         private Button button_cikar;
         private Button button_topla;
         private Button button_sonuc;
-        private Button button_nokta;
+        private Button button_virgul;
         private Button button10;
         private Button button9;
         private Button button8;

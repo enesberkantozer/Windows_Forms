@@ -9,8 +9,8 @@ namespace Hesap_Makinesi
         {
             InitializeComponent();
         }
+
         string hesaplanacak = "";
-        string islemi_duzenle = "";
 
         private void button_Click(object sender, EventArgs e)
         {
@@ -20,11 +20,16 @@ namespace Hesap_Makinesi
 
         private void button_sonuc_Click(object sender, EventArgs e)
         {
-            islemi_duzenle = hesaplanacak.Replace("X", "*").Replace("÷", "/");
+            hesaplanacak = textBox1.Text;
+            hesaplanacak = hesaplanacak.Replace("X", "*").Replace("÷", "/").Replace(",", ".");
             try
             {
-                textBox1.Text = new DataTable().Compute(islemi_duzenle, null).ToString().Replace(",", ".").ToString();
-                hesaplanacak = textBox1.Text;
+                hesaplanacak = new DataTable().Compute(hesaplanacak, null).ToString().Replace(".",",");
+                if (Convert.ToDecimal(hesaplanacak)== (int)Convert.ToDecimal(hesaplanacak))
+                {
+                    hesaplanacak= ((int)Convert.ToDecimal(hesaplanacak)).ToString();
+                }
+                textBox1.Text = hesaplanacak;
             }
             catch (Exception ex)
             {
@@ -41,6 +46,7 @@ namespace Hesap_Makinesi
 
         private void button_bir_temizle_Click(object sender, EventArgs e)
         {
+            hesaplanacak = textBox1.Text;
             if (hesaplanacak.Length > 0)
             {
                 hesaplanacak = hesaplanacak.Remove(hesaplanacak.Length - 1);
@@ -117,7 +123,7 @@ namespace Hesap_Makinesi
             button_cikar = new Button();
             button_topla = new Button();
             button_sonuc = new Button();
-            button_nokta = new Button();
+            button_virgul = new Button();
             button10 = new Button();
             button9 = new Button();
             button8 = new Button();
@@ -255,27 +261,27 @@ namespace Hesap_Makinesi
             button_sonuc.Location = new Point(237, 594);
             button_sonuc.Name = "button_sonuc";
             button_sonuc.Size = new Size(100, 100);
-            button_sonuc.TabIndex = 32;
+            button_sonuc.TabIndex = 21;
             button_sonuc.Text = "=";
             button_sonuc.UseVisualStyleBackColor = true;
             button_sonuc.Click += button_sonuc_Click;
             // 
-            // button_nokta
+            // button_virgul
             // 
-            button_nokta.Location = new Point(17, 594);
-            button_nokta.Name = "button_nokta";
-            button_nokta.Size = new Size(100, 100);
-            button_nokta.TabIndex = 31;
-            button_nokta.Text = ".";
-            button_nokta.UseVisualStyleBackColor = true;
-            button_nokta.Click += button_Click;
+            button_virgul.Location = new Point(17, 594);
+            button_virgul.Name = "button_virgul";
+            button_virgul.Size = new Size(100, 100);
+            button_virgul.TabIndex = 32;
+            button_virgul.Text = ",";
+            button_virgul.UseVisualStyleBackColor = true;
+            button_virgul.Click += button_Click;
             // 
             // button10
             // 
             button10.Location = new Point(127, 594);
             button10.Name = "button10";
             button10.Size = new Size(100, 100);
-            button10.TabIndex = 30;
+            button10.TabIndex = 31;
             button10.Text = "0";
             button10.UseVisualStyleBackColor = true;
             button10.Click += button_Click;
@@ -285,7 +291,7 @@ namespace Hesap_Makinesi
             button9.Location = new Point(237, 264);
             button9.Name = "button9";
             button9.Size = new Size(100, 100);
-            button9.TabIndex = 29;
+            button9.TabIndex = 30;
             button9.Text = "9";
             button9.UseVisualStyleBackColor = true;
             button9.Click += button_Click;
@@ -295,7 +301,7 @@ namespace Hesap_Makinesi
             button8.Location = new Point(127, 264);
             button8.Name = "button8";
             button8.Size = new Size(100, 100);
-            button8.TabIndex = 28;
+            button8.TabIndex = 29;
             button8.Text = "8";
             button8.UseVisualStyleBackColor = true;
             button8.Click += button_Click;
@@ -305,7 +311,7 @@ namespace Hesap_Makinesi
             button7.Location = new Point(17, 264);
             button7.Name = "button7";
             button7.Size = new Size(100, 100);
-            button7.TabIndex = 27;
+            button7.TabIndex = 28;
             button7.Text = "7";
             button7.UseVisualStyleBackColor = true;
             button7.Click += button_Click;
@@ -315,7 +321,7 @@ namespace Hesap_Makinesi
             button6.Location = new Point(237, 374);
             button6.Name = "button6";
             button6.Size = new Size(100, 100);
-            button6.TabIndex = 26;
+            button6.TabIndex = 27;
             button6.Text = "6";
             button6.UseVisualStyleBackColor = true;
             button6.Click += button_Click;
@@ -325,7 +331,7 @@ namespace Hesap_Makinesi
             button5.Location = new Point(127, 374);
             button5.Name = "button5";
             button5.Size = new Size(100, 100);
-            button5.TabIndex = 25;
+            button5.TabIndex = 26;
             button5.Text = "5";
             button5.UseVisualStyleBackColor = true;
             button5.Click += button_Click;
@@ -335,7 +341,7 @@ namespace Hesap_Makinesi
             button4.Location = new Point(17, 374);
             button4.Name = "button4";
             button4.Size = new Size(100, 100);
-            button4.TabIndex = 24;
+            button4.TabIndex = 25;
             button4.Text = "4";
             button4.UseVisualStyleBackColor = true;
             button4.Click += button_Click;
@@ -345,7 +351,7 @@ namespace Hesap_Makinesi
             button3.Location = new Point(237, 484);
             button3.Name = "button3";
             button3.Size = new Size(100, 100);
-            button3.TabIndex = 23;
+            button3.TabIndex = 24;
             button3.Text = "3";
             button3.UseVisualStyleBackColor = true;
             button3.Click += button_Click;
@@ -355,7 +361,7 @@ namespace Hesap_Makinesi
             button2.Location = new Point(127, 484);
             button2.Name = "button2";
             button2.Size = new Size(100, 100);
-            button2.TabIndex = 22;
+            button2.TabIndex = 23;
             button2.Text = "2";
             button2.UseVisualStyleBackColor = true;
             button2.Click += button_Click;
@@ -365,7 +371,7 @@ namespace Hesap_Makinesi
             button1.Location = new Point(17, 484);
             button1.Name = "button1";
             button1.Size = new Size(100, 100);
-            button1.TabIndex = 21;
+            button1.TabIndex = 22;
             button1.Text = "1";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button_Click;
@@ -383,7 +389,7 @@ namespace Hesap_Makinesi
             panel1.Controls.Add(button_cikar);
             panel1.Controls.Add(button_topla);
             panel1.Controls.Add(button_sonuc);
-            panel1.Controls.Add(button_nokta);
+            panel1.Controls.Add(button_virgul);
             panel1.Controls.Add(button10);
             panel1.Controls.Add(button9);
             panel1.Controls.Add(button8);
@@ -465,7 +471,7 @@ namespace Hesap_Makinesi
             buttons.Add(button8);
             buttons.Add(button9);
             buttons.Add(button10);
-            buttons.Add(button_nokta);
+            buttons.Add(button_virgul);
             buttons.Add(button_sonuc);
             buttons.Add(button_topla);
             buttons.Add(button_cikar);
@@ -529,7 +535,7 @@ namespace Hesap_Makinesi
             buttons.Add(button8);
             buttons.Add(button9);
             buttons.Add(button10);
-            buttons.Add(button_nokta);
+            buttons.Add(button_virgul);
             buttons.Add(button_sonuc);
             buttons.Add(button_topla);
             buttons.Add(button_cikar);
@@ -553,5 +559,30 @@ namespace Hesap_Makinesi
             }
         }
 
+        private void Form1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsDigit(e.KeyChar) || e.KeyChar == '+' || e.KeyChar == '-' ||
+                e.KeyChar == '*' || e.KeyChar == '/' || e.KeyChar==',' ||
+                e.KeyChar=='(' || e.KeyChar==')')
+            {
+                textBox1.Text += e.KeyChar.ToString().Replace("*", "X").Replace("/", "÷");
+            }
+        }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode==Keys.Enter)
+            {
+                button_sonuc_Click(button_sonuc, null);
+            }
+            else if (e.KeyCode==Keys.Delete)
+            {
+                button_hep_temizle_Click(button_hep_temizle, null);
+            }
+            else if (e.KeyCode==Keys.Back)
+            {
+                button_bir_temizle_Click(button_bir_temizle, null);
+            }
+        }
     }
 }
